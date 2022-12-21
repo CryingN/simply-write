@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://code/调试脚本.gd" type="Script" id=1]
+[ext_resource path="res://pirture/文档.png" type="Texture" id=2]
+[ext_resource path="res://pirture/连接.png" type="Texture" id=3]
+[ext_resource path="res://pirture/摆烂.png" type="Texture" id=4]
+[ext_resource path="res://theme/shadow.tres" type="Shader" id=5]
+
+[sub_resource type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 5 )
+shader_param/shadow = Color( 1, 1, 1, 0.52549 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 5 )
+shader_param/shadow = Color( 1, 1, 1, 0.52549 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 5 )
+shader_param/shadow = Color( 1, 1, 1, 0.52549 )
+
+[node name="主场景" type="Node2D"]
+
+[node name="move" type="Node2D" parent="."]
+material = SubResource( 2 )
+position = Vector2( 10, 10 )
+scale = Vector2( 0.7, 0.7 )
+z_index = 5
+
+[node name="reset" type="Button" parent="move"]
+material = SubResource( 3 )
+margin_left = 214.0
+margin_top = 4.0
+margin_right = 294.0
+margin_bottom = 78.0
+icon = ExtResource( 4 )
+flat = true
+
+[node name="connect" type="Button" parent="move"]
+material = SubResource( 4 )
+margin_left = 107.0
+margin_right = 179.0
+margin_bottom = 83.0
+icon = ExtResource( 3 )
+flat = true
+
+[node name="text" type="Button" parent="move"]
+material = SubResource( 5 )
+margin_right = 72.0
+margin_bottom = 83.0
+icon = ExtResource( 2 )
+flat = true
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+
+[connection signal="pressed" from="move/reset" to="Node2D" method="_on_reset_pressed"]
+[connection signal="pressed" from="move/connect" to="Node2D" method="_on_connect_pressed"]
+[connection signal="pressed" from="move/text" to="Node2D" method="_on_text_pressed"]

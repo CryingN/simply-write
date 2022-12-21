@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://font/font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://code/text调试脚本.gd" type="Script" id=2]
+[ext_resource path="res://theme/textedit.tres" type="Theme" id=3]
+[ext_resource path="res://pirture/移动.png" type="Texture" id=4]
+[ext_resource path="res://theme/shadow.tres" type="Shader" id=5]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 5 )
+shader_param/shadow = Color( 1, 1, 1, 0.392157 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3, 3 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 3, 3 )
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 10, 10 )
+z_index = 2
+script = ExtResource( 2 )
+
+[node name="TextEdit" type="TextEdit" parent="."]
+margin_right = 300.0
+margin_bottom = 450.0
+theme = ExtResource( 3 )
+custom_colors/member_variable_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "测试
+"
+syntax_highlighting = true
+highlight_all_occurrences = true
+context_menu_enabled = false
+shortcut_keys_enabled = false
+wrap_enabled = true
+minimap_width = 60
+caret_block_mode = true
+caret_blink = true
+
+[node name="Button" type="Button" parent="."]
+material = SubResource( 3 )
+margin_left = -16.0
+margin_top = -13.0
+margin_right = 16.0
+margin_bottom = 13.0
+toggle_mode = true
+icon = ExtResource( 4 )
+flat = true
+
+[node name="left_Area2D" type="Area2D" parent="."]
+position = Vector2( 0, 30 )
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left_Area2D"]
+shape = SubResource( 1 )
+
+[node name="right_Area2D" type="Area2D" parent="."]
+position = Vector2( 300, 30 )
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right_Area2D"]
+shape = SubResource( 2 )
+
+[connection signal="gui_input" from="Button" to="." method="_on_Button_gui_input"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
